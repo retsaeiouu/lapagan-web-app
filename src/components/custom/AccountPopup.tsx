@@ -10,6 +10,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import UserForm from "./UserForm";
 
 export default function AccountPopup() {
   return (
@@ -22,7 +23,7 @@ export default function AccountPopup() {
           <UserCircleIcon className="h-5 lg:h-7 w-5 lg:w-7 text-foreground/60" />
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="border-none">
         <Tabs defaultValue="login" className="w-full">
           <DialogHeader className="flex flex-col gap-5">
             <DialogTitle>Account Center</DialogTitle>
@@ -32,13 +33,13 @@ export default function AccountPopup() {
             </TabsList>
           </DialogHeader>
           <TabsContent value="login" className="flex flex-col">
-            <div className="h-72"></div>
+            <UserForm />
             <h3 className="mt-auto text-sm text-center">
               Are you new? <b>Create an account!</b>
             </h3>
           </TabsContent>
           <TabsContent value="signup" className="flex flex-col">
-            <div className="h-72"></div>
+            <UserForm />
             <h3 className="mt-auto text-sm text-center">
               Already have an account? <b>Login now!</b>
             </h3>
