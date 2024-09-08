@@ -1,33 +1,33 @@
-import { sql } from "drizzle-orm";
-import { integer } from "drizzle-orm/sqlite-core";
-import { text } from "drizzle-orm/sqlite-core";
-import { sqliteTable } from "drizzle-orm/sqlite-core";
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const userTable = sqliteTable("user", {
+export const userTable = pgTable("user", {
   id: text("id").notNull().primaryKey(),
   username: text("username").notNull().unique(),
   password_hash: text("password_hash").notNull(),
 });
 
-export const sessionTable = sqliteTable("session", {
+export const sessionTable = pgTable("session", {
   id: text("id").notNull().primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
-  expiresAt: integer("expires_at").notNull(),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "date",
+  }).notNull(),
 });
 
-export const noteTable = sqliteTable("note", {
+export const noteTable = pgTable("note", {
   id: text("id").notNull().primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
   content: text("content").notNull(),
-  created: text("created").default(sql`(CURRENT_TIMESTAMP)`),
+  created: timestamp("created").defaultNow(),
 });
 
-export const likeTable = sqliteTable("like", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+export const likeTable = pgTable("like", {
+  id: serial("id").primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
@@ -36,8 +36,8 @@ export const likeTable = sqliteTable("like", {
     .references(() => noteTable.id),
 });
 
-export const commentTable = sqliteTable("comment", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+export const commentTable = pgTable("comment", {
+  id: serial("id").primaryKey(),
   content: text("content").notNull(),
   userId: text("user_id")
     .notNull()
@@ -45,5 +45,5 @@ export const commentTable = sqliteTable("comment", {
   noteId: text("note_id")
     .notNull()
     .references(() => noteTable.id),
-  created: text("created").default(sql`(CURRENT_TIMESTAMP)`),
+  created: timestamp("created").defaultNow(),
 });

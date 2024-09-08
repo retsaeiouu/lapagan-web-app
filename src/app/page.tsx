@@ -1,22 +1,20 @@
 import NoteCard from "@/components/custom/NoteCard";
 
-//  TODO:
-//        add auth actions (signup, login, logout)
-//        and auth request validation
-//        ...
-
 export default function Home() {
+  // tests lmao
   return (
     <>
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
-      <NoteCard />
+      <NoteCard>
+        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+      </NoteCard>
+      <NoteCard>uuuu</NoteCard>
+      <NoteCard>uuuu</NoteCard>
+      <NoteCard>
+        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+      </NoteCard>
+      <NoteCard>
+        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+      </NoteCard>
     </>
   );
 }
