@@ -15,11 +15,6 @@ import { cache } from "react";
 
 import type { Session, User } from "lucia";
 
-//  TODO:
-//        add validate function and try to change
-//        the ui on when the user is either logged
-//        in or not
-
 export async function signupAction(_: unknown, data: FormData) {
   try {
     const username = data.get("username");
@@ -27,7 +22,7 @@ export async function signupAction(_: unknown, data: FormData) {
     if (!username || !password)
       return { success: false, message: "Empty Data" };
 
-    const userId = generateIdFromEntropySize(10);
+    const userId = generateIdFromEntropySize(10); // 16 characters long
     const hashedPassword = await hash(password as string, {
       // recommended minimum parameters -by lucia
       memoryCost: 19456,
@@ -119,6 +114,7 @@ export async function loginAction(_: unknown, data: FormData) {
   }
 }
 
+//  WARN: this function should be moved to utils idr or something..
 export const validateRequest = cache(
   async (): Promise<
     { user: User; session: Session } | { user: null; session: null }
@@ -172,9 +168,8 @@ export async function logout() {
   refreshHomePage();
 }
 
+// this must be refactor out too
 export async function refreshHomePage() {
-  // clears the cache then redirects
-  // the request to home
+  // clears the cache
   revalidatePath("/");
-  redirect("/");
 }

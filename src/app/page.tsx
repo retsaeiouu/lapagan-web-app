@@ -1,6 +1,9 @@
 import NoteCard from "@/components/custom/NoteCard";
 
 export default function Home() {
+  //  TODO:
+  //  - - - > query the notes, likes and comment feature
+
   // tests lmao
   return (
     <>

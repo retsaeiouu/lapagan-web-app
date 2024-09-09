@@ -28,6 +28,8 @@ import {
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 export default function UserForm({ login }: { login: boolean }) {
+  // conditional type for login or sign up form, might refactor this into
+  // two seperate form for more readable
   type userFormSchemaType<isLogin extends boolean> = isLogin extends true
     ? t_userLoginFormZodSchema
     : t_userFormZodSchema;
