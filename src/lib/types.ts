@@ -13,7 +13,7 @@ export type t_userTableInsertSchema = z.infer<typeof userTableInsertSchema>;
 
 // types for user auth forms
 // signup
-export const userFormZodSchema = z.object({
+export const userSignupFormZodSchema = z.object({
   username: z
     .string()
     .min(3, { message: "username is too short" })
@@ -30,7 +30,7 @@ export const userFormZodSchema = z.object({
       message: "invalid symbols are not allowed",
     }),
 });
-export type t_userFormZodSchema = z.infer<typeof userFormZodSchema>;
+export type t_userSignupFormZodSchema = z.infer<typeof userSignupFormZodSchema>;
 
 // type for login
 export const userLoginFormZodSchema = z.object({

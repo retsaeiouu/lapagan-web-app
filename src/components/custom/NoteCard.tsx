@@ -1,6 +1,5 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -13,17 +12,25 @@ import {
 } from "@heroicons/react/24/solid";
 import { HeartIcon as UnlikedIcon } from "@heroicons/react/24/outline";
 
-export default function NoteCard({ children }: { children: React.ReactNode }) {
+export default async function NoteCard({
+  author,
+  time,
+  content,
+}: {
+  author: string;
+  time: string;
+  content: string;
+}) {
   return (
     <Card className="flex flex-col w-[100%] bg-secondary border-none">
       <div className="h-auto flex">
         <CardHeader className="flex flex-col h-auto pr-0">
           <CardDescription className="flex flex-col text-sm">
-            <span className="font-bold text-foreground/80">@retsssssssss</span>
-            <span className="text-muted-foreground/70 text-xs">just now</span>
+            <span className="font-bold text-foreground/80">{`@${author}`}</span>
+            <span className="text-muted-foreground/70 text-xs">{time}</span>
           </CardDescription>
           <CardTitle className="max-w-[12rem] sm:max-w-72">
-            <div className="text-lg font-black break-words">{children}</div>
+            <div className="text-lg font-black break-words">{content}</div>
           </CardTitle>
         </CardHeader>
         <div className="flex flex-col p-3 gap-1 ml-auto">

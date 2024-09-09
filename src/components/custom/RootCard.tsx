@@ -7,14 +7,16 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AccountPopup from "@/components/custom/AccountPopup";
-import { PencilIcon } from "@heroicons/react/24/solid";
 import CreateNote from "./CreateNote";
+import { validateRequest } from "@/actions/userFormActions";
 
 export default async function RootCard({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { user } = await validateRequest();
+
   return (
     <Card className="w-screen lg:w-1/2 flex flex-col border-none">
       <ScrollArea className="flex-1">
@@ -30,7 +32,7 @@ export default async function RootCard({
         <CardContent>
           <div className="flex flex-col gap-5 items-center">{children}</div>
         </CardContent>
-        <CreateNote />
+        {user && <CreateNote />} {/*  NOTE: create anonymous posting feature */}
       </ScrollArea>
     </Card>
   );

@@ -20,22 +20,20 @@ import { Loader2 } from "lucide-react";
 
 import { loginAction, signupAction } from "@/actions/userFormActions";
 import {
-  userFormZodSchema,
+  userSignupFormZodSchema,
   userLoginFormZodSchema,
-  type t_userFormZodSchema,
+  type t_userSignupFormZodSchema,
   type t_userLoginFormZodSchema,
 } from "@/lib/types";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 export default function UserForm({ login }: { login: boolean }) {
-  // conditional type for login or sign up form, might refactor this into
-  // two seperate form for more readable
-  type userFormSchemaType<isLogin extends boolean> = isLogin extends true
-    ? t_userLoginFormZodSchema
-    : t_userFormZodSchema;
-  const resolver = login ? userLoginFormZodSchema : userFormZodSchema;
-  const form = useForm<userFormSchemaType<typeof login>>({
-    resolver: zodResolver(resolver),
+  return login ? <LoginUserForm /> : <SignupUserForm />;
+}
+
+export function SignupUserForm() {
+  const form = useForm<t_userSignupFormZodSchema>({
+    resolver: zodResolver(userSignupFormZodSchema),
     mode: "onChange",
     defaultValues: {
       username: "",
@@ -44,14 +42,12 @@ export default function UserForm({ login }: { login: boolean }) {
   });
   const { isValid } = form.formState;
 
-  // handles if the form should be login or sign up
-  // simple logic i came up with haha no bash bash
-  let userFormType = login ? loginAction : signupAction;
-  const [response, formAction] = useFormState(userFormType, null);
+  const [response, formAction] = useFormState(signupAction, null);
 
   return (
     <>
-      {!response?.success && response != null && (
+      {/* if not successful */}
+      {response && !response.success && (
         <Alert variant="destructive" className="flex flex-col">
           <AlertTitle>
             <ExclamationCircleIcon className="h-5 w-5 translate-y-0.5" />
@@ -70,9 +66,7 @@ export default function UserForm({ login }: { login: boolean }) {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                {!login && (
-                  <FormDescription>Enter a unique name.</FormDescription>
-                )}
+                <FormDescription>Enter a unique name</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -86,18 +80,73 @@ export default function UserForm({ login }: { login: boolean }) {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                {!login && (
-                  <FormDescription>Enter a secure password</FormDescription>
-                )}
+                <FormDescription>Enter a secure password</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {!login ? (
-            <UserFormButton valid={isValid} />
-          ) : (
-            <UserFormButton login={login} valid={isValid} />
-          )}
+          <UserFormButton valid={isValid} />
+        </form>
+      </Form>
+    </>
+  );
+}
+
+export function LoginUserForm() {
+  const form = useForm<t_userLoginFormZodSchema>({
+    resolver: zodResolver(userLoginFormZodSchema),
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      password_hash: "",
+    },
+  });
+  const { isValid } = form.formState;
+
+  const [response, formAction] = useFormState(loginAction, null);
+
+  return (
+    <>
+      {/* if not successful */}
+      {response && !response.success && (
+        <Alert variant="destructive" className="flex flex-col">
+          <AlertTitle>
+            <ExclamationCircleIcon className="h-5 w-5 translate-y-0.5" />
+            {response?.message}
+          </AlertTitle>
+        </Alert>
+      )}
+      <Form {...form}>
+        <form action={formAction} className="space-y-3">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>Enter your username</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password_hash"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>Enter your password</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <UserFormButton login={true} valid={isValid} />
         </form>
       </Form>
     </>
@@ -108,7 +157,7 @@ export function UserFormButton({
   valid,
   login,
 }: {
-  valid?: boolean;
+  valid: boolean;
   login?: boolean;
 }) {
   const { pending } = useFormStatus();

@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,7 +23,7 @@ import UserForm from "@/components/custom/UserForm";
 
 import { logout, validateRequest } from "@/actions/userFormActions";
 import { User } from "lucia";
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/solid";
 
 export default async function AccountPopup() {
   const { user } = await validateRequest();
@@ -49,17 +50,21 @@ function AccountCenter() {
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
           </DialogHeader>
-          <TabsContent value="login" className="flex flex-col">
+          <TabsContent value="login" className="flex flex-col gap-5">
             <UserForm login={true} />
-            <h3 className="mt-5 text-sm text-center">
-              Are you new? <b>Create an account!</b>
-            </h3>
+            <DialogDescription className="mx-auto">
+              <span className="mt-5 text-sm text-center">
+                Are you new? <b>Create an account!</b>
+              </span>
+            </DialogDescription>
           </TabsContent>
-          <TabsContent value="signup" className="flex flex-col">
+          <TabsContent value="signup" className="flex flex-col gap-5">
             <UserForm login={false} />
-            <h3 className="mt-5 text-sm text-center">
-              Already have an account? <b>Login now!</b>
-            </h3>
+            <DialogDescription className="mx-auto">
+              <span className="mt-5 text-sm text-center">
+                Already have an account? <b>Login now!</b>
+              </span>
+            </DialogDescription>
           </TabsContent>
         </Tabs>
       </DialogContent>
@@ -67,7 +72,6 @@ function AccountCenter() {
   );
 }
 
-// do this later
 function Dashboard({ user }: { user: User }) {
   return (
     <DropdownMenu>

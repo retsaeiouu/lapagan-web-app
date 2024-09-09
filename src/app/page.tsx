@@ -1,23 +1,19 @@
+import { getNotes } from "@/actions/noteMethods";
 import NoteCard from "@/components/custom/NoteCard";
 
-export default function Home() {
+export default async function Home() {
   //  TODO:
-  //  - - - > query the notes, likes and comment feature
+  //  - - - > implement like and comment feature
+  //          query the likes and comments of each note
+  //          anonymous posts and private posts(soon)
 
-  // tests lmao
+  const notes = await getNotes();
   return (
     <>
-      <NoteCard>
-        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-      </NoteCard>
-      <NoteCard>uuuu</NoteCard>
-      <NoteCard>uuuu</NoteCard>
-      <NoteCard>
-        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-      </NoteCard>
-      <NoteCard>
-        missuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-      </NoteCard>
+      {!notes?.[0] && (
+        <h2 className="font-bold">There are currently no posted notes</h2>
+      )}
+      {notes && notes.map((note, index) => <NoteCard {...note} key={index} />)}
     </>
   );
 }
