@@ -40,12 +40,12 @@ export const userLoginFormZodSchema = z.object({
 export type t_userLoginFormZodSchema = z.infer<typeof userLoginFormZodSchema>;
 
 // types for notes table
-export const noteTableSchema = z.object({
+export const noteTableInsertSchema = z.object({
   id: z.string().trim().min(1),
   userId: z.string().trim().min(1),
   content: z.string().min(1, { message: "notes can't be empty" }),
 });
-export type t_noteTableSchema = z.infer<typeof noteTableSchema>;
+export type t_noteTableSchema = z.infer<typeof noteTableInsertSchema>;
 
 export const noteFormSchema = z.object({
   content: z
@@ -57,3 +57,10 @@ export const noteFormSchema = z.object({
     .transform((value) => value.trim()),
 });
 export type t_noteFormSchema = z.infer<typeof noteFormSchema>;
+
+// types for like table
+export const likeTableInsertSchema = z.object({
+  userId: z.string().min(1),
+  noteId: z.string().min(1),
+});
+export type t_likeTableInsertSchema = z.infer<typeof likeTableInsertSchema>;

@@ -1,6 +1,6 @@
 "use server";
 
-import { noteTableSchema, t_noteTableSchema } from "@/lib/types";
+import { noteTableInsertSchema, t_noteTableSchema } from "@/lib/types";
 import { generateIdFromEntropySize } from "lucia";
 import { refreshHomePage, validateRequest } from "./userFormActions";
 import { db } from "@/db/init";
@@ -23,7 +23,7 @@ export async function postNote(_: unknown, data: FormData) {
       content: noteContent as string,
     };
 
-    const result = noteTableSchema.safeParse(newNote);
+    const result = noteTableInsertSchema.safeParse(newNote);
     if (!result.success) return { success: false, message: "server error:(" };
 
     await db.insert(noteTable).values(result.data).execute();

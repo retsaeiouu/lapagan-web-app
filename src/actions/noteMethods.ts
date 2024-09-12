@@ -1,6 +1,9 @@
+"use server";
+
 import { db } from "@/db/init";
-import { noteTable, userTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { likeTable, noteTable, userTable } from "@/db/schema";
+import { likeTableInsertSchema, t_likeTableInsertSchema } from "@/lib/types";
+import { eq, sql } from "drizzle-orm";
 
 export async function getNotes() {
   try {
@@ -17,10 +20,22 @@ export async function getNotes() {
 
         const ago = await getAgoDisplay(note.created!);
 
+        const likeDetails = await db
+          .select({
+            userId: likeTable.userId,
+            count: sql<number>`cast(count(*) as integer)`,
+          })
+          .from(likeTable)
+          .where(eq(likeTable.noteId, note.id))
+          .groupBy(likeTable.userId)
+          .execute();
+
         return {
+          noteId: note.id,
           author: noteAuthor[0].username,
           time: ago,
           content: note.content,
+          likeDetails: likeDetails[0],
         };
       }),
     );
@@ -55,4 +70,24 @@ export async function getAgoDisplay(timePosted: Date) {
   }
 
   return `more than 7 days ago`;
+}
+
+export async function likeAction(_: unknown, data: FormData) {
+  const userId = data.get("userId");
+  const noteId = data.get("noteId");
+  if (!userId || !noteId) return { success: false, message: "empty data" };
+  const newLike: t_likeTableInsertSchema = {
+    userId: userId as string,
+    noteId: noteId as string,
+  };
+
+  const result = likeTableInsertSchema.safeParse(newLike);
+  if (!result.success) return { success: false, message: "invalid data" };
+
+  try {
+    await db.insert(likeTable).values(result.data);
+  } catch {
+    return { success: false, message: "server error:(" };
+  }
+  return { success: true, message: "Liked!" };
 }
