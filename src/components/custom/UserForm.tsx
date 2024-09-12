@@ -64,7 +64,10 @@ export function SignupUserForm() {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    className="rounded-xl border-none bg-secondary"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>Enter a unique name</FormDescription>
                 <FormMessage />
@@ -78,7 +81,10 @@ export function SignupUserForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    className="rounded-xl border-none bg-secondary"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>Enter a secure password</FormDescription>
                 <FormMessage />
@@ -125,7 +131,10 @@ export function LoginUserForm() {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    className="rounded-xl border-none bg-secondary"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>Enter your username</FormDescription>
                 <FormMessage />
@@ -139,7 +148,10 @@ export function LoginUserForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    className="rounded-xl border-none bg-secondary"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>Enter your password</FormDescription>
                 <FormMessage />

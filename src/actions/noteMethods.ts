@@ -3,11 +3,16 @@
 import { db } from "@/db/init";
 import { likeTable, noteTable, userTable } from "@/db/schema";
 import { likeTableInsertSchema, t_likeTableInsertSchema } from "@/lib/types";
-import { eq, sql } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
+import { refreshHomePage } from "./userFormActions";
 
 export async function getNotes() {
   try {
-    const rawNotes = await db.select().from(noteTable).execute();
+    const rawNotes = await db
+      .select()
+      .from(noteTable)
+      .orderBy(desc(noteTable.created))
+      .execute();
     if (!rawNotes[0]) return null;
 
     return Promise.all(
@@ -72,6 +77,20 @@ export async function getAgoDisplay(timePosted: Date) {
   return `more than 7 days ago`;
 }
 
+export async function isUserLiked(userId: string | undefined, noteId: string) {
+  if (!userId) return false;
+  try {
+    const like = await db
+      .select({ id: likeTable.id })
+      .from(likeTable)
+      .where(and(eq(likeTable.userId, userId), eq(likeTable.noteId, noteId)))
+      .execute();
+    return like[0].id ? true : false;
+  } catch {
+    return false;
+  }
+}
+
 export async function likeAction(_: unknown, data: FormData) {
   const userId = data.get("userId");
   const noteId = data.get("noteId");
@@ -85,9 +104,31 @@ export async function likeAction(_: unknown, data: FormData) {
   if (!result.success) return { success: false, message: "invalid data" };
 
   try {
-    await db.insert(likeTable).values(result.data);
+    await db.insert(likeTable).values(result.data).execute();
   } catch {
     return { success: false, message: "server error:(" };
   }
+  refreshHomePage();
   return { success: true, message: "Liked!" };
+}
+
+export async function unlikeAction(_: unknown, data: FormData) {
+  const userId = data.get("userId");
+  const noteId = data.get("noteId");
+  if (!userId || !noteId) return { success: false, message: "empty data" };
+  try {
+    await db
+      .delete(likeTable)
+      .where(
+        and(
+          eq(likeTable.noteId, noteId as string),
+          eq(likeTable.userId, userId as string),
+        ),
+      )
+      .execute();
+  } catch {
+    return { success: false, message: "delete failed" };
+  }
+  refreshHomePage();
+  return { success: true, message: "deleted successfully" };
 }

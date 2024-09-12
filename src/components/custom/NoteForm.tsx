@@ -81,7 +81,7 @@ export function NoteForm() {
                   <FormControl>
                     <Textarea
                       placeholder="what's up?"
-                      className="resize-none bg-secondary text-foreground"
+                      className="resize-none rounded-xl bg-secondary text-foreground"
                       {...field}
                     />
                   </FormControl>
