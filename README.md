@@ -2,7 +2,7 @@
 
 a place to share anything, whether it's your **unconfessed feelings** or **rants**. with a **like** and **comment** feature too!
 
-![lapagan-image]('./public/lapagan.png')
+![lapagan-image]('public/lapagan.png')
 
 ---
 
