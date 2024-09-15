@@ -21,7 +21,7 @@ export default async function RootCard({
     <Card className="w-screen lg:w-1/2 flex flex-col border-none">
       <ScrollArea className="flex-1">
         <CardHeader className="flex sticky top-0 items-center h-full bg-background/50 backdrop-blur-md">
-          <CardTitle className="font-monkey text-2xl lg:text-3xl tracking-wide text-foreground">
+          <CardTitle className="font-hachi text-2xl lg:text-3xl tracking-wide text-foreground">
             Lapagan
           </CardTitle>
           <div className="ml-auto">

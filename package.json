@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/hachi-maru-pop": "^5.1.0",
     "@fontsource/happy-monkey": "^5.0.14",
     "@fontsource/poppins": "^5.0.15",
     "@heroicons/react": "^2.1.5",

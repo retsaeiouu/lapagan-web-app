@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db/init";
-import { likeTable, noteTable, userTable } from "@/db/schema";
+import { commentTable, likeTable, noteTable, userTable } from "@/db/schema";
 import { likeTableInsertSchema, t_likeTableInsertSchema } from "@/lib/types";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { refreshHomePage } from "./userFormActions";
@@ -28,11 +28,15 @@ export async function getNotes() {
         const likeDetails = await db
           .select({
             userId: likeTable.userId,
-            count: sql<number>`cast(count(*) as integer)`,
           })
           .from(likeTable)
           .where(eq(likeTable.noteId, note.id))
-          .groupBy(likeTable.userId)
+          .execute();
+
+        const commentsCount = await db
+          .select({ count: sql<number>`cast(count(*) as integer)` })
+          .from(commentTable)
+          .where(eq(commentTable.noteId, note.id))
           .execute();
 
         return {
@@ -40,7 +44,11 @@ export async function getNotes() {
           author: noteAuthor[0].username,
           time: ago,
           content: note.content,
-          likeDetails: likeDetails[0],
+          likeDetails: {
+            userId: likeDetails[0]?.userId,
+            count: likeDetails.length,
+          },
+          comments: commentsCount[0].count,
         };
       }),
     );

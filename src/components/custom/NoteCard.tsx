@@ -6,12 +6,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { ChatBubbleOvalLeftEllipsisIcon as CommentIcon } from "@heroicons/react/24/solid";
 import { LikeButton } from "@/hooks/custom/LikeButton";
 import { validateRequest } from "@/actions/userFormActions";
 import { isUserLiked } from "@/actions/noteMethods";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
+import CommentSection from "./CommentSection";
 
 export default async function NoteCard({
   noteId,
@@ -19,12 +19,14 @@ export default async function NoteCard({
   time,
   content,
   likeDetails,
+  comments,
 }: {
   noteId: string;
   author: string;
   time: string;
   content: string;
   likeDetails: { userId: string; count: number };
+  comments: number;
 }) {
   const { user } = await validateRequest();
   const isLiked = await isUserLiked(user?.id, noteId);
@@ -45,35 +47,36 @@ export default async function NoteCard({
           </div>
         </DialogTrigger>
         <DialogContent
-          className="h-[80%] w-[90%] bg-secondary rounded-3xl p-2 border-none"
+          className="h-[60%] w-[90%] bg-secondary rounded-3xl p-2 pt-5 pb-3 border-none"
           aria-describedby={undefined}
         >
+          <div className="flex flex-col ml-6">
+            <h3 className="font-bold text-foreground/80">{`@${author}`}</h3>
+            <h3 className="text-muted-foreground/70 text-xs">{time}</h3>
+          </div>
           <ScrollArea>
-            <Card className="flex flex-col w-[100%] bg-secondary border-none">
+            <Card className="flex flex-col w-[100%] bg-secondary mt-0 mb-0 pt-0 border-none">
               <div className="h-auto flex">
-                <CardHeader className="flex flex-col h-auto pr-0">
-                  <CardDescription className="flex flex-col text-sm fixed top-2 left-2 px-2 py-2 bg-secondary/30 backdrop-blur-lg rounded-xl">
-                    <span className="font-bold text-foreground/80">{`@${author}`}</span>
-                    <span className="text-muted-foreground/70 text-xs">
-                      {time}
-                    </span>
-                  </CardDescription>
-                  <CardTitle className="max-w-[12rem] sm:max-w-72">
+                <CardHeader className="flex flex-col mt-0 pt-0 h-auto pr-0">
+                  <CardTitle className="max-w-[12rem] sm:max-w-72 mt-0 pt-0">
                     <div className="text-lg font-black break-words flex flex-col items-start">
                       {content}
                     </div>
                   </CardTitle>
                 </CardHeader>
               </div>
-              <CardFooter className="fixed bottom-2 bg-secondary/30 py-1 px-2 rounded-xl backdrop-blur-lg flex items-start gap-5 text-xs text-muted-foreground/70">
-                <p>
-                  {likeDetails ? likeDetails.count : 0}{" "}
-                  {likeDetails && likeDetails.count !== 1 ? "Likes" : "Like"}
-                </p>
-                <p>98 Comments</p>
-              </CardFooter>
             </Card>
           </ScrollArea>
+          <div className="flex h-auto items-center gap-5 ml-6 text-xs text-muted-foreground/70">
+            <p>
+              {likeDetails ? likeDetails.count : 0}{" "}
+              {likeDetails && likeDetails.count !== 1 ? "Likes" : "Like"}
+            </p>
+            <p>
+              {comments ? comments : 0}{" "}
+              {comments && comments !== 1 ? "Comments" : "Comment"}
+            </p>
+          </div>
         </DialogContent>
       </Dialog>
     );
@@ -105,7 +108,7 @@ export default async function NoteCard({
           {user && (
             <LikeButton noteId={noteId} userId={user.id} isLiked={isLiked} />
           )}
-          <CommentIcon className="h-8 w-8 text-foreground" />
+          <CommentSection noteId={noteId} userId={user?.id} author={author} />
         </div>
       </div>
       <CardFooter className="flex items-start gap-5 text-xs text-muted-foreground/70">
@@ -113,7 +116,10 @@ export default async function NoteCard({
           {likeDetails ? likeDetails.count : 0}{" "}
           {likeDetails && likeDetails.count !== 1 ? "Likes" : "Like"}
         </p>
-        <p>98 Comments</p>
+        <p>
+          {comments ? comments : 0}{" "}
+          {comments && comments !== 1 ? "Comments" : "Comment"}
+        </p>
       </CardFooter>
     </Card>
   );

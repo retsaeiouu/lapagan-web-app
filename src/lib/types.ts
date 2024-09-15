@@ -39,7 +39,7 @@ export const userLoginFormZodSchema = z.object({
 });
 export type t_userLoginFormZodSchema = z.infer<typeof userLoginFormZodSchema>;
 
-// types for notes table
+// types for notes
 export const noteTableInsertSchema = z.object({
   id: z.string().trim().min(1),
   userId: z.string().trim().min(1),
@@ -50,7 +50,7 @@ export type t_noteTableSchema = z.infer<typeof noteTableInsertSchema>;
 export const noteFormSchema = z.object({
   content: z
     .string()
-    .min(1, "notes can't be empty")
+    .min(1, { message: "notes can't be empty" })
     .refine((value) => /\S/.test(value), {
       message: "notes cannot consist only of spaces",
     })
@@ -58,9 +58,24 @@ export const noteFormSchema = z.object({
 });
 export type t_noteFormSchema = z.infer<typeof noteFormSchema>;
 
-// types for like table
+// types for likes
 export const likeTableInsertSchema = z.object({
   userId: z.string().min(1),
   noteId: z.string().min(1),
 });
 export type t_likeTableInsertSchema = z.infer<typeof likeTableInsertSchema>;
+
+// types for comments
+export const commentTableInsertSchema = z.object({
+  userId: z.string().min(1),
+  noteId: z.string().min(1),
+  content: z.string().min(1, { message: "comment is empty" }),
+});
+export type t_commentTableInsertSchema = z.infer<
+  typeof commentTableInsertSchema
+>;
+
+export const commentFormSchema = commentTableInsertSchema.pick({
+  content: true,
+});
+export type t_commentFormSchema = z.infer<typeof commentFormSchema>;

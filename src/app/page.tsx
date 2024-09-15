@@ -10,7 +10,7 @@ export default async function Home() {
   const notes = await getNotes();
   return (
     <>
-      {!notes?.[0] && (
+      {!notes && (
         <h2 className="font-bold">There are currently no posted notes</h2>
       )}
       {notes && notes.map((note, index) => <NoteCard {...note} key={index} />)}

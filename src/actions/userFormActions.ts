@@ -168,7 +168,7 @@ export async function logout() {
   refreshHomePage();
 }
 
-// this must be refactor out too
+// this must be refactored out too
 export async function refreshHomePage() {
   // clears the cache
   revalidatePath("/");

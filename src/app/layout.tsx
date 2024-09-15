@@ -3,7 +3,9 @@ import "./globals.css";
 
 import "@fontsource/poppins";
 import "@fontsource/happy-monkey";
+import "@fontsource/hachi-maru-pop";
 import RootCard from "@/components/custom/RootCard";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Lapagan Web App",
@@ -18,7 +20,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark bg-background flex justify-center w-screen h-screen">
-        <RootCard>{children}</RootCard>
+        <Suspense
+          fallback={
+            <>
+              <h1 className="fixed top-52 font-hachi text-2xl lg:text-3xl tracking-wide text-foreground font-black">
+                Lapagan
+              </h1>
+              <h2 className="fixed bottom-32 text-lg text-foreground">
+                by team maloi
+              </h2>
+            </>
+          }
+        >
+          <RootCard>{children}</RootCard>
+        </Suspense>
       </body>
     </html>
   );
