@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+import { Comfortaa, Gloria_Hallelujah } from "next/font/google";
+
+const comfortaa = Comfortaa({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-comfortaa",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const gloriaHallelujah = Gloria_Hallelujah({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-gloria",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -24,12 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${comfortaa.variable} ${gloriaHallelujah.className} antialiased`}
+    >
+      <body className="bg-custom_darkerspace">{children}</body>
     </html>
   );
 }
