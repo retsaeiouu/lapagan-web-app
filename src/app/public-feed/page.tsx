@@ -1,10 +1,10 @@
 export default function Page() {
   return (
-    <div className="flex flex-col gap-5 pt-3">
-      <h3 className="text-xs md:text-base font-bold text-custom_mint/60 font-poppins self-center">
+    <div className="flex flex-col gap-5">
+      <h3 className="text-xs md:text-sm tracking-wider font-semibold text-custom_mint/40 font-poppins self-center">
         public feed
       </h3>
-      <div className="grid lg:grid-cols-2 gap-5">
+      <div className="grid lg:grid-cols-2 gap-5 justify-center">
         <NoteCard />
         <NoteCard />
         <NoteCard />
@@ -17,14 +17,16 @@ export default function Page() {
 
 function NoteCard() {
   return (
-    <div className="flex flex-col bg-custom_charcoal p-6 gap-10 rounded-3xl">
-      <div className="h-5 w-48 bg-custom_columbia" />
-      <div className="flex flex-col gap-2 w-full">
-        <div className="h-5 w-[100%] bg-custom_columbia" />
-        <div className="h-5 w-[50%] bg-custom_columbia" />
-        <div className="h-5 w-[60%] bg-custom_columbia" />
+    <div className="max-sm:w-[19rem] font-comfortaa flex flex-col bg-custom_charcoal px-6 py-4 gap-4 md:gap-6 rounded-3xl">
+      <h3 className="text-base italic text-custom_mint/90 font-bold">
+        Anonymous
+      </h3>
+      <div className="text-pretty break-words">
+        <p className="text-lg font-bold text-custom_mint">
+          missssssuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu maloi onli hehe
+        </p>
       </div>
-      <div className="h-5 w-16 bg-custom_columbia" />
+      <h6 className="text-xs font-bold text-custom_mint/60">2 days ago</h6>
     </div>
   );
 }
