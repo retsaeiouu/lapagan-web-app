@@ -13,6 +13,7 @@ const config: Config = {
         custom_darkerspace: "#242C3E",
         custom_space: "#283044",
         custom_payne: "#506980",
+        custom_charcoal: "#3C4D62",
         custom_air: "#78A1BB",
         custom_columbia: "#B2CBD5",
         custom_mint: "#EBF5EE",
@@ -23,6 +24,7 @@ const config: Config = {
       fontFamily: {
         comfortaa: ["var(--font-comfortaa)"],
         gloria: ["var(--font-gloria)"],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },
