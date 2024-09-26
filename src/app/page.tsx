@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-//  FIXME: scrolling is not smooth -_-
-
 export default function Home() {
   return (
     <main className="h-screen w-screen overflow-auto flex flex-col justify-between max-sm:pt-16 pb-2 md:pb-4 px-8 md:px-16 lg:px-32">
@@ -43,7 +41,8 @@ const MainButtons = () => (
         Accounts
       </h3>
       <h4 className="font-comfortaa text-custom_mint/10 text-sm md:text-base break-words text-center">
-        Archived Notes, Like &amp; Comment interactivity, and more!
+        {/* Archived Notes, Like &amp; Comment interactivity, and more! */}
+        Unavailable yet:(
       </h4>
     </button>
     <button className="lg:col-span-3 rounded-3xl flex flex-col items-center justify-center bg-custom_columbia/80 p-4 md:p-5 transition-all hover:scale-[1.02] ease-out duration-300">
@@ -63,6 +62,9 @@ const MainButtons = () => (
       <h3 className="opacity-30 font-comfortaa text-custom_mint/80 text-lg md:text-2xl font-bold">
         What is lapagan?
       </h3>
+      <h4 className="font-comfortaa text-custom_mint/10 text-sm md:text-base break-words text-center">
+        Unavailable yet:(
+      </h4>
     </button>
   </div>
 );
