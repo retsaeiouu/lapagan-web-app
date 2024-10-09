@@ -35,13 +35,15 @@ const MainButtons = () => (
     </button>
     <button
       disabled
-      className="cursor-not-allowed bg-custom_payne rounded-3xl flex flex-col items-center justify-center p-4 md:p-5 transition-all ease-out duration-300"
+      className="relative bg-custom_payne rounded-3xl flex flex-col items-center justify-center p-4 md:p-5 transition-all ease-out duration-300"
     >
       <h3 className="opacity-30 font-comfortaa text-custom_mint/80 text-lg md:text-2xl font-bold">
         Accounts
       </h3>
       <h4 className="font-comfortaa text-custom_mint/10 text-sm md:text-base break-words text-center">
-        {/* Archived Notes, Like &amp; Comment interactivity, and more! */}
+        Archived Notes, Like &amp; Comment interactivity, and more!
+      </h4>
+      <h4 className="absolute font-comfortaa text-custom_mint/70 text-sm md:text-base break-words text-center">
         Unavailable yet:(
       </h4>
     </button>
@@ -57,12 +59,12 @@ const MainButtons = () => (
     </button>
     <button
       disabled
-      className="cursor-not-allowed lg:col-span-3 rounded-3xl flex flex-col items-center justify-center bg-custom_raisin p-4 md:p-5 transition-all ease-out duration-300"
+      className="relative lg:col-span-3 rounded-3xl flex flex-col items-center justify-center bg-custom_raisin p-4 md:p-5 transition-all ease-out duration-300"
     >
-      <h3 className="opacity-30 font-comfortaa text-custom_mint/80 text-lg md:text-2xl font-bold">
+      <h3 className="opacity-30 font-comfortaa text-custom_mint/30 text-lg md:text-2xl font-bold">
         What is lapagan?
       </h3>
-      <h4 className="font-comfortaa text-custom_mint/10 text-sm md:text-base break-words text-center">
+      <h4 className="absolute font-comfortaa text-custom_mint/70 text-sm md:text-base break-words text-center">
         Unavailable yet:(
       </h4>
     </button>

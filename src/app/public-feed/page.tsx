@@ -1,17 +1,19 @@
 export default function Page() {
   return (
-    <div className="flex flex-col gap-5">
-      <h3 className="text-xs md:text-sm tracking-wider font-semibold text-custom_mint/40 font-poppins self-center">
-        public feed
-      </h3>
-      <div className="grid lg:grid-cols-2 gap-5 justify-center">
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
+    <main className="px-8 md:px-16 lg:px-32">
+      <div className="flex flex-col gap-5">
+        <h3 className="text-xs md:text-sm tracking-wider font-semibold text-custom_mint/40 font-poppins self-center">
+          public feed
+        </h3>
+        <div className="grid lg:grid-cols-2 gap-5 justify-center">
+          <NoteCard />
+          <NoteCard />
+          <NoteCard />
+          <NoteCard />
+          <NoteCard />
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

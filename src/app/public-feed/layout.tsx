@@ -14,9 +14,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             lapagan
           </h1>
         </Link>
+        {/*  TODO: add create post button */}
       </header>
-      <main className="px-8 md:px-16 lg:px-32">{children}</main>
-      <footer className="mt-auto ml-auto py-1 mr-2">
+      {children}
+      <footer className="mt-auto ml-auto pt-10 py-1 mr-2">
         <h6 className="text-xs md:text-sm text-custom_mint/30 font-poppins">
           &copy; Copyright 2024. Lapagan. Team Maloi
         </h6>
