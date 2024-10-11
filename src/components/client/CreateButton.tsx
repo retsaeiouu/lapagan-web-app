@@ -14,7 +14,7 @@ export function CreateButton() {
         href="/public-feed/create-anonymous-note"
         className="flex gap-1 items-center"
       >
-        <h4 className="text-base font-bold font-poppins tracking-wide">
+        <h4 className="text-base md:text-xl font-bold font-poppins tracking-wide">
           create
         </h4>
         <PaperAirplaneIcon className="h-5 w-5" />

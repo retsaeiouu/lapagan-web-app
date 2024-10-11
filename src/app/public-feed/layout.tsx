@@ -1,11 +1,6 @@
-//  TODO:
-//    setup neon db lesgoooooooo
-//    deploy if it works
-
 import { CreateButton } from "@/components/client/CreateButton";
 import Link from "next/link";
 
-//    set up db and finish the creating anonymous notes feature
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col h-screen w-screen bg-custom_raisin overflow-auto">
