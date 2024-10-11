@@ -1,3 +1,5 @@
+import { createAnonymousNote } from "@/actions/anonymousNote";
+
 export default function Page() {
   return (
     <div className="flex flex-col items-center">
@@ -5,17 +7,22 @@ export default function Page() {
         <h1 className="text-center mb-auto text-2xl md:text-3xl font-bold font-comfortaa text-custom_mint/80">
           Create a new anonymous Note
         </h1>
-        <textarea
-          name="noteinput"
-          placeholder="what's up?"
-          className="focus:outline-none break-words text-pretty text-custom_mint focus:text-custom_raisin bg-transparent focus:bg-custom_columbia h-72 md:h-44 text-lg md:text-xl font-comfortaa font-bold tracking-wide px-4 py-2 rounded-xl resize-none transition-all duration-150 ease-out"
-        />
-        <button
-          className="rounded-xl bg-custom_payne drop-shadow-lg hover:bg-custom_air active:scale-95 active:bg-custom_air p-4 font-comfortaa tracking-wide font-bold text-lg md:text-2xl text-custom_mint/80 transition-all duration-150 ease-out"
-          type="submit"
+        <form
+          action={createAnonymousNote}
+          className="w-full flex flex-col gap-4"
         >
-          post note
-        </button>
+          <textarea
+            name="anonymousnoteinput"
+            placeholder="what's up?"
+            className="focus:outline-none break-words text-pretty text-custom_mint focus:text-custom_raisin bg-transparent focus:bg-custom_columbia h-72 md:h-44 text-lg md:text-xl font-comfortaa font-bold tracking-wide px-4 py-2 rounded-xl resize-none transition-all duration-150 ease-out"
+          />
+          <button
+            className="rounded-xl bg-custom_payne drop-shadow-lg hover:bg-custom_air active:scale-95 active:bg-custom_air p-4 font-comfortaa tracking-wide font-bold text-lg md:text-2xl text-custom_mint/80 transition-all duration-150 ease-out"
+            type="submit"
+          >
+            post note
+          </button>
+        </form>
       </div>
     </div>
   );
