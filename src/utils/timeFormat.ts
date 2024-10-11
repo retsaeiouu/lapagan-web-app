@@ -1,8 +1,6 @@
 export const getDisplay = (timePosted: Date) => {
   const now = new Date();
-  const difference = Math.floor(
-    ((now as any) - (new Date(timePosted) as any)) / 1000,
-  );
+  const difference = Math.floor((now.getTime() - timePosted.getTime()) / 1000);
 
   if (difference < 60) {
     return "just now";

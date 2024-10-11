@@ -13,6 +13,9 @@ export const AnonymousNoteForm = () => {
   } = useForm({
     resolver: zodResolver(anonymousNoteZodSchema),
     mode: "onTouched",
+    defaultValues: {
+      content: "",
+    },
   });
 
   return (
