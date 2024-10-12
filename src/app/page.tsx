@@ -12,7 +12,7 @@ export default function Home() {
 const MainDisplay = () => (
   <div className="flex flex-1 flex-col justify-center gap-8 md:gap-12 items-center">
     <h1 className="text-custom_mint font-gloria font-bold text-5xl md:text-6xl tracking-wide">
-      lapagan
+      BALUYOT
     </h1>
     <h2 className="lg:w-[60%] break-words text-custom_mint/80 font-comfortaa text-justify md:text-center lg:text-justify text-xl">
       Express your ideas, share them quick. Appreciate every thoughts that make
