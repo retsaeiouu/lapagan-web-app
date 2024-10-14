@@ -1,4 +1,5 @@
 import { getAnonymousNotes } from "@/actions/anonymousNote";
+import { refreshPublicFeed } from "@/actions/publicFeed";
 
 export default function Page() {
   return (
@@ -14,6 +15,7 @@ export default function Page() {
 }
 
 async function Notes() {
+  await refreshPublicFeed();
   const notes = await getAnonymousNotes();
   const MAX_NOTE_LENGTH = 100;
 
