@@ -1,5 +1,6 @@
 "use client";
 
+import { refreshPublicFeed } from "@/actions/publicFeed";
 import { useRouter } from "next/navigation";
 
 export const HomeButtons = () => {
@@ -36,7 +37,10 @@ export const HomeButtons = () => {
       <button
         className="lg:col-span-3 rounded-3xl flex flex-col items-center justify-center bg-custom_columbia/80 p-4 md:p-5 transition-all hover:scale-[1.02] ease-out duration-300"
         type="button"
-        onClick={() => router.push("/public-feed")}
+        onClick={async () => {
+          await refreshPublicFeed();
+          router.push("/public-feed");
+        }}
       >
         <h3 className="font-comfortaa text-custom_raisin text-lg md:text-2xl font-bold break-words">
           Public Feed
